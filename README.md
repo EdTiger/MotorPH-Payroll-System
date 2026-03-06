@@ -47,8 +47,37 @@ The initial requirement focuses on presenting employee details and automatically
 
 ---
 
-## 👨‍💻 Development Team
+# 👨‍💻 Meet the Development Team
 
-This phase of the **MotorPH Basic Payroll System** was developed by:
+<div align="center">
 
-### **ByteBeans**
+### ✨ **ByteBeans Development Team**
+
+Behind the creation of the **MotorPH Basic Payroll System** is **ByteBeans**, a collaborative group of developers united by curiosity, dedication, and a shared passion for building meaningful systems.
+
+This project is the product of teamwork, collective problem-solving, and countless moments of refining ideas into functional code. Every member contributed equally to shaping the system, ensuring that each component—from logic to documentation—reflects the team's commitment to learning and innovation.
+
+Together, the team transformed simple concepts into a working payroll solution, demonstrating the power of collaboration in software development.
+
+</div>
+
+---
+
+### 🌟 The ByteBeans
+
+<div align="center">
+
+**Rey Manuel Oljol**  
+**Expeditus Yntig**  
+**Angel Rhyne Hangad**  
+**Jeana Karyll Esteron**
+
+</div>
+
+---
+
+<div align="center">
+
+⭐ *Built with teamwork, dedication, and the shared pursuit of creating something meaningful.*
+
+</div>
