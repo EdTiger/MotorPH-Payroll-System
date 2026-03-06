@@ -67,10 +67,11 @@ Together, the team transformed simple concepts into a working payroll solution, 
 
 <div align="center">
 
-**Rey Manuel Oljol**  
+
 **Expeditus Yntig**  
 **Angel Rhyne Hangad**  
 **Jeana Karyll Esteron**
+**Rey Manuel Oljol**  
 
 </div>
 
