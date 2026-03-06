@@ -1,18 +1,18 @@
 <div align="center">
 
-# 🧾 Basic Payroll System (Phase 1)
-
+# 🧾 Basic Payroll System (Phase 1) 🧾
+ 
 </div>
 
 ---
 
-## 📌 Project Overview
+## 📌 Project Overview 📌
 This repository contains the **Phase 1 implementation** of the **MotorPH Basic Payroll System**.  
 The initial requirement focuses on presenting employee details and automatically calculating salaries through code using the number of hours worked and basic deductions.
 
 ---
 
-## ⚙️ Program Details
+## ⚙️ Program Details ⚙️
 
 The **MotorPH Basic Payroll System** is a console-based Java program that demonstrates the basic structure of a payroll computation system.
 
@@ -37,7 +37,7 @@ Overall, the system demonstrates how **basic payroll computations can be automat
 
 ---
 
-## 🎯 Phase 1 Tasks and Objectives
+## 🎯 Phase 1 Tasks and Objectives 🎯
 
 - **Employee Information**  
   Present employee details in the prescribed format:  
@@ -54,7 +54,7 @@ Overall, the system demonstrates how **basic payroll computations can be automat
 
 ---
 
-## 💻 Development Environment
+## 💻 Development Environment 💻
 
 | Component | Specification |
 |-----------|--------------|
@@ -65,14 +65,14 @@ Overall, the system demonstrates how **basic payroll computations can be automat
 
 ---
 
-## 📊 Documentation
+## 📊 Documentation 📊
 
 **Project Management:**  
 [View Project Plan on Google Sheets](https://docs.google.com/spreadsheets/d/1FF1jRVCnI0Zv32z_0VOuM7BB6sGdVNDUTtjyJr_Z7lg/edit?gid=2134013708#gid=2134013708)
 
 ---
 
-# 👨‍💻 Meet the Development Team
+# 👨‍💻 Meet the Development Team 👨‍💻
 
 <div align="center">
 
@@ -86,7 +86,7 @@ This project is the result of teamwork, collective problem-solving, and the shar
 
 ---
 
-### 🌟 The ByteBeans
+### 🌟 The ByteBeans 🌟
 
 <div align="center">
 
@@ -102,6 +102,6 @@ This project is the result of teamwork, collective problem-solving, and the shar
 
 <div align="center">
 
-⭐ *Built with teamwork, dedication, and the shared pursuit of creating something meaningful.*
+⭐ *Built with teamwork, dedication, and the shared pursuit of creating something meaningful.* ⭐
 
 </div>
