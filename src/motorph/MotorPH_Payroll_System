@@ -1,0 +1,302 @@
+import java.io.*;
+import java.util.*;
+
+public class Motor_PH {
+
+/**
+ * MotorPH Simple Payroll System
+ */
+
+
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("=================================");
+        System.out.println("                                 ");
+        System.out.println("             MotorPH             ");
+        System.out.println("         Payroll System          ");
+        System.out.println("                                 ");
+        System.out.println("=================================");
+        // =============================
+        // LOGIN
+        // =============================
+        System.out.print("Username: ");
+        String username = scanner.nextLine();
+
+        System.out.print("Password: ");
+        String password = scanner.nextLine();
+
+        boolean payrollStaff =
+                username.equals("payroll_staff") && password.equals("12345");
+
+        boolean employee =
+                username.equals("employee") && password.equals("12345");
+
+        if (!payrollStaff && !employee) {
+
+            System.out.println("---------------------------------");
+            System.out.println("                                 ");
+            System.out.println("           LOGIN FAILED          ");
+            System.out.println("      ______________________     ");
+            System.out.println("                                 ");
+            System.out.println("   Invalid username or password  ");
+            System.out.println("         Please try again.       ");
+            System.out.println("                                 ");
+            System.out.println("---------------------------------");
+            return;
+        }
+
+        // =============================
+        // PAYROLL STAFF MENU
+        // =============================
+        if (payrollStaff) {
+
+            System.out.println("\n1 Process Payroll");
+            System.out.println("2 Exit");
+
+            int choice = Integer.parseInt(scanner.nextLine());
+
+            if (choice == 2) {
+                return;
+            }
+
+            System.out.println("\n1 One Employee");
+            System.out.println("2 All Employees");
+            System.out.println("3 Exit");
+
+            int empChoice = Integer.parseInt(scanner.nextLine());
+
+            if (empChoice == 3) {
+                return;
+            }
+
+            System.out.print("\nEnter employee number: ");
+            int empNumber = Integer.parseInt(scanner.nextLine());
+
+            processEmployee(empNumber);
+        }
+
+        // =============================
+        // EMPLOYEE LOGIN MENU
+        // =============================
+        if (employee) {
+
+            System.out.println("\n1 Enter employee number");
+            System.out.println("2 Exit");
+
+            int choice = Integer.parseInt(scanner.nextLine());
+
+            if (choice == 2) {
+                return;
+            }
+
+            System.out.print("\nEnter employee number: ");
+            int empNumber = Integer.parseInt(scanner.nextLine());
+
+            showEmployeeInfo(empNumber);
+        }
+
+        scanner.close();
+    }
+
+    // ============================================
+    // SHOW EMPLOYEE INFO (FOR EMPLOYEE LOGIN)
+    // ============================================
+    public static void showEmployeeInfo(int empNumber) {
+
+        try {
+
+            BufferedReader reader = new BufferedReader(new FileReader("employees.csv"));
+            String line;
+
+            reader.readLine(); // skip header
+
+            while ((line = reader.readLine()) != null) {
+
+                String[] empdata = line.split(",");
+
+                int num = Integer.parseInt(empdata[0]);
+
+                if (num == empNumber) {
+                    
+                    System.out.println("-----------------------------------------------");
+                    System.out.println("               Employee Details                ");
+                    System.out.println("===============================================");
+                    System.out.println("| Emp #  | Name                | Birthday     |");
+                    System.out.println("-----------------------------------------------");
+                    System.out.println("| " + num 
+                                     + " | " + empdata[2] + " " + empdata[1]
+                                     + " | " + empdata[3]);
+                    break;
+                }
+            }
+
+            reader.close();
+
+        } catch (Exception e) {
+            System.out.println("Error reading file.");
+        }
+    }
+
+    // ============================================
+    // PROCESS PAYROLL
+    // ============================================
+    public static void processEmployee(int empNumber) {
+
+        try {
+
+            BufferedReader employeeData = new BufferedReader(new FileReader("employees.csv"));
+            String line;
+
+            String firstName = "";
+            String lastName = "";
+            String birthday = "";
+            double hourlyRate = 0;
+
+            employeeData.readLine();
+
+            while ((line = employeeData.readLine()) != null) {
+
+                String[] empdata = line.split(",");
+
+                int num = Integer.parseInt(empdata[0]);
+
+                if (num == empNumber) {
+
+                    lastName = empdata[1];
+                    firstName = empdata[2];
+                    birthday = empdata[3];
+                    hourlyRate = Double.parseDouble(empdata[5]);
+                    break;
+                }
+            }
+
+            employeeData.close();
+            System.out.println("-----------------------------------------------");
+            System.out.println("               Employee Details                ");
+            System.out.println("===============================================");
+            System.out.println("| Emp #  | Name                | Birthday     |");
+            System.out.println("-----------------------------------------------");
+            System.out.println("| "  + empNumber
+                             + " | " + firstName + " " + lastName 
+                             + " | " + birthday);
+            System.out.println("-----------------------------------------------");
+
+            for (int month = 6; month <= 12; month++) {
+
+                double firstCutoff = 0;
+                double secondCutoff = 0;
+
+                BufferedReader attendance = new BufferedReader(new FileReader("attendance.csv"));
+                attendance.readLine();
+
+                String line2;
+
+                while ((line2 = attendance.readLine()) != null) {
+
+                    String[] parts = line2.split(",");
+
+                    int num = Integer.parseInt(parts[0]);
+                    int m = Integer.parseInt(parts[1]);
+                    int day = Integer.parseInt(parts[2]);
+
+                    if (num == empNumber && m == month) {
+
+                        double hours = computeHours(parts[3], parts[4]);
+
+                        if (day <= 15) {
+                            firstCutoff += hours;
+                        } else {
+                            secondCutoff += hours;
+                        }
+                    }
+                }
+
+                attendance.close();
+
+                if (firstCutoff > 0) {
+
+                    double gross = firstCutoff * hourlyRate;
+
+                    System.out.println("\nCutoff Date: " + getMonth(month) + " 1 to " + getMonth(month) + " 15");
+                    System.out.println("Total Hours Worked: " + firstCutoff);
+                    System.out.println("Gross Salary: " + gross);
+                    System.out.println("Net Salary: " + gross);
+                }
+
+                if (secondCutoff > 0) {
+
+                    double gross = secondCutoff * hourlyRate;
+
+                    double sss = gross * 0.085;
+                    double phil = gross * 0.06;
+                    double pagibig = 100;
+                    double tax = gross * 0.18;
+
+                    double totalDeduction = sss + phil + pagibig + tax;
+                    double net = gross - totalDeduction;
+
+                    System.out.println("\nCutoff Date: " + getMonth(month) + " 16 to end");
+                    System.out.println("Total Hours Worked: " + secondCutoff);
+                    System.out.println("Gross Salary: " + gross);
+
+                    System.out.println("Each Deduction:");
+                    System.out.println("SSS: " + sss);
+                    System.out.println("PhilHealth: " + phil);
+                    System.out.println("Pag-IBIG: " + pagibig);
+                    System.out.println("Tax: " + tax);
+
+                    System.out.println("Total Deductions: " + totalDeduction);
+                    System.out.println("Net Salary: " + net);
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error processing payroll.");
+        }
+    }
+
+    // ============================================
+    // COMPUTE HOURS
+    // ============================================
+    public static double computeHours(String in, String out) {
+
+        String[] inTime = in.split(":");
+        String[] outTime = out.split(":");
+
+        int inH = Integer.parseInt(inTime[0]);
+        int inM = Integer.parseInt(inTime[1]);
+
+        int outH = Integer.parseInt(outTime[0]);
+        int outM = Integer.parseInt(outTime[1]);
+
+        double start = inH + (inM / 60.0);
+        double end = outH + (outM / 60.0);
+
+        return end - start;
+    }
+
+    // ============================================
+    // MONTH NAME
+    // ============================================
+    public static String getMonth(int m) {
+
+        if (m == 6) return "June";
+        if (m == 7) return "July";
+        if (m == 8) return "August";
+        if (m == 9) return "September";
+        if (m == 10) return "October";
+        if (m == 11) return "November";
+        if (m == 12) return "December";
+
+        return "";
+    }
+}
+    
+
+
+
+
+
+
