@@ -128,7 +128,7 @@ public class Main {
             if (empChoice == 2) {
 
                 try {
-                    // open employees.csv file
+            // open employees.csv file
             File file = new File("employees.csv"); 
             BufferedReader empInfo = new BufferedReader(new FileReader(file));
                     
@@ -184,6 +184,8 @@ public class Main {
                 // if employee number matches
                 if (num == empNumber) {
 
+                    found = true;
+
                     System.out.println("-----------------------------------------------");
                     System.out.println("               Employee Details                ");
                     System.out.println("===============================================");
@@ -216,16 +218,17 @@ public class Main {
     public static void processEmployee(int empNumber) {
 
         try {
-
-            File empDetails = new File("employees.csv"); 
-            BufferedReader empInfo = new BufferedReader(new FileReader(empDetails));
-            String line;
+       // open employees.csv file
+       File empDetails = new File("employees.csv"); 
+       BufferedReader empInfo = new BufferedReader(new FileReader(empDetails));
+            
+       String line; // varible that stores each row of the file
 
             // employee information variables
-            String firstName = "";
-            String lastName = "";
-            String birthday = "";
-            double hourlyRate = 0;
+            String firstName = ""; // employee first name
+            String lastName = "";  // employee last name
+            String birthday = "";  // employee birthday
+            double hourlyRate = 0; // employee hourly salary
 
             empInfo.readLine(); // skip header
 
@@ -275,12 +278,13 @@ public class Main {
 
                 double firstCutoff = 0;   // June 1-15
                 double secondCutoff = 0;  // June 16-end
-
+                
+            // Open attendance.cvs file
             File attRecord = new File("attendance.csv"); 
             BufferedReader attendance = new BufferedReader(new FileReader(attRecord));
-            attendance.readLine();
+            attendance.readLine(); // skip header row
 
-                String line2;
+                String line2; //
 
                 // read attendance records
                 while ((line2 = attendance.readLine()) != null) {
@@ -293,7 +297,8 @@ public class Main {
 
                     // check employee and month
                     if (num == empNumber && m == month) {
-
+                        
+                        // Compute total hours worked for the day
                         double hours = computeHours(empAttendance[3], empAttendance[4]);
 
                         // separate hours by cutoff
