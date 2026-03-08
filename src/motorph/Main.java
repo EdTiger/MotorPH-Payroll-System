@@ -335,7 +335,6 @@ public class Main {
 
                     //_____________________________
                     // SSS Contribution Computation 
-                    //---------
                     double sss = 0;
 
                     if (gross <= 3250) sss = 135;
@@ -384,7 +383,8 @@ public class Main {
                     else if (gross <= 24750) sss = 1102.5;
                     else if (gross >= 24750) sss = 1125;
                    
-                    // PhilHealth computation
+                    //____________________________________
+                    // PhilHealth Contribution Computation 
                     double philHealth = gross;
 
                     if (philHealth < 10000) philHealth = 10000;
@@ -393,7 +393,8 @@ public class Main {
                     double monthlyPremiumRate = philHealth * 0.03;
                     double phil = monthlyPremiumRate / 2;
 
-                    // Pag-IBIG contribution
+                    //_________________________________
+                    // Pagibig Contribution Computation 
                     double pagibig;
 
                     if (gross >= 1000 && gross <= 1500)
@@ -404,7 +405,8 @@ public class Main {
                     if (pagibig > 100)
                         pagibig = 100;
 
-                    // Taxable income after deductions
+                    //______________________________________________
+                    // Taxable Income Computation (After Deductions)
                     double taxableIncome = gross - (sss + phil + pagibig);
 
                     double tax = 0;
@@ -458,7 +460,6 @@ public class Main {
                     int inMin = Integer.parseInt(inTime[1]);
  
                     double timeIn = inHour + (inMin / 60.0); // 08:30 -> 8.5
-
 
                     // Convert time-out to decimal hours
                     String[] outTime = out.split(":");
