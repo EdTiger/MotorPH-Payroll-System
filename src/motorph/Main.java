@@ -333,7 +333,9 @@ public class Main {
 
                     double gross = secondCutoff * hourlyRate;
 
-                    // SSS contribution based on salary bracket
+                    //-----------------------------
+                    // SSS Contribution Computation     
+                    //-----------------------------
                     double sss = 0;
 
                     if (gross <= 3250) sss = 135;
