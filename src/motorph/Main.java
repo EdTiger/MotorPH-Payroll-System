@@ -411,7 +411,7 @@ public class Main {
                    
                     //____________________________________
                     // PhilHealth Contribution Computation 
-                            double monthlyPremium;
+                    double monthlyPremium;
 
                     if (gross <= 10000) {
                     monthlyPremium = 300;        // minimum premium
