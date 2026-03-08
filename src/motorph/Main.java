@@ -333,9 +333,9 @@ public class Main {
 
                     double gross = secondCutoff * hourlyRate;
 
-                    //-----------------------------
-                    // SSS Contribution Computation     
-                    //-----------------------------
+                    //_____________________________
+                    // SSS Contribution Computation 
+                    //---------
                     double sss = 0;
 
                     if (gross <= 3250) sss = 135;
@@ -452,28 +452,25 @@ public class Main {
 
     public static double computeHours(String in, String out) {
 
-        // split time format HH:MM
-        String[] logIn = in.split(":");
-        String[] logOut = out.split(":");
+                    // Convert time-in to decimal hours
+                    String[] inTime = in.split(":");
+                    int inHour = Integer.parseInt(inTime[0]);
+                    int inMin = Integer.parseInt(inTime[1]);
+ 
+                    double timeIn = inHour + (inMin / 60.0); // 08:30 -> 8.5
 
-        int inHour = Integer.parseInt(logIn[0]);
-        int inMin = Integer.parseInt(logIn[1]);
 
-        int outHour = Integer.parseInt(logOut[0]);
-        int outMin = Integer.parseInt(logOut[1]);
+                    // Convert time-out to decimal hours
+                    String[] outTime = out.split(":");
+                    int outHour = Integer.parseInt(outTime[0]);
+                    int outMin = Integer.parseInt(outTime[1]);
 
-        // convert to decimal hours
-        double start = inHour + (inMin / 60.0);
-        double end = outHour + (outMin / 60.0);
+                    double timeOut = outHour + (outMin / 60.0); // 17:00 -> 17.0
 
-        // handle overnight shift
-        if (end < start) {
-            end += 24;
-        }
+                    // Compute total hours worked
+                    double hoursWorked = timeOut - timeIn; // Work hours = Ending time − Starting time
 
-        // return total hours worked
-        return end - start;
-    }
+                    return hoursWorked;
 
     // ============================================
     // GET MONTH NAME
