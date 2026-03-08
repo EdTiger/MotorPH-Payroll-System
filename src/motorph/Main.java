@@ -1,14 +1,32 @@
 package motorph;
-
-
+/**
+ * MotorPH Payroll System
+ *
+ * This program reads employee and attendance records from CSV files
+ * and computes payroll automatically.
+ *
+ * Features:
+ * - Login system (Employee or Payroll Staff)
+ * - Employee information lookup
+ * - Payroll processing
+ * - Automatic computation of:
+ *      - Gross Salary
+ *      - SSS Contribution
+ *      - PhilHealth Contribution
+ *      - Pag-IBIG Contribution
+ *      - Income Tax
+ * - Payroll summary per cutoff
+ *
+ * Developed for MotorPH Phase 1 Payroll System
+ */
 import java.io.*;      // allows reading files like CSV
-import java.util.*;    // allows using Scanner
+import java.util.*;    // allows using Scanner for input
 
 
 public class Main {
 
     /**
-     * MotorPH Simple Payroll System
+     * MotorPH Basic Payroll System
      */
     public static void main(String[] args) {
 
@@ -45,15 +63,15 @@ public class Main {
         // if login credentials are incorrect
         if (!payrollStaff && !employee) {
 
-            System.out.println("---------------------------------");
-            System.out.println("                                 ");
-            System.out.println("           LOGIN FAILED          ");
-            System.out.println("      ______________________     ");
-            System.out.println("                                 ");
-            System.out.println("   Invalid username or password  ");
-            System.out.println("         Please try again.       ");
-            System.out.println("                                 ");
-            System.out.println("---------------------------------");
+            System.out.println("------------------------------------");
+            System.out.println("                                    ");
+            System.out.println("             LOGIN FAILED           ");
+            System.out.println("       _______________________      ");
+            System.out.println("                                    ");
+            System.out.println( "Incorrect username and/or password" );
+            System.out.println("          Please try again.         ");
+            System.out.println("                                    ");
+            System.out.println("------------------------------------");
 
             return; // stop program
         }
@@ -64,22 +82,23 @@ public class Main {
 
         if (employee) {
 
-            // employee choices
+            // Show menu options
             System.out.println("\n1 Enter employee number");
             System.out.println("2 Exit");
 
+            // Read user choice
             int choice = Integer.parseInt(scanner.nextLine()); // Integer.parseInt() converts the text into an integer
 
-            // exit option
+            // Exit option
             if (choice == 2) {
                 return;
             }
 
-            // ask for employee number
+            // Ask for employee number
             System.out.print("\nEnter employee number: ");
             int empNumber = Integer.parseInt(scanner.nextLine());
 
-            // show employee information
+            // Display employee information
             employeeInfo(empNumber);
         }
 
@@ -89,6 +108,7 @@ public class Main {
 
         if (payrollStaff) {
 
+            // Show payroll menu
             System.out.println("\n1 Process Payroll");
             System.out.println("2 Exit");
 
@@ -98,7 +118,7 @@ public class Main {
                 return;
             }
 
-            // payroll sub-options
+            // Payroll processing options
             System.out.println("\n1 One Employee");
             System.out.println("2 All Employees");
             System.out.println("3 Exit");
@@ -115,9 +135,11 @@ public class Main {
 
             if (empChoice == 1) {
 
+                // Ask for employee number
                 System.out.print("\nEnter employee number: ");
                 int empNumber = Integer.parseInt(scanner.nextLine());
 
+                // Compute payroll for one employee
                 processEmployee(empNumber);
             }
 
@@ -127,23 +149,23 @@ public class Main {
 
             if (empChoice == 2) {
 
-                try {
+                try 
             // open employees.csv file
             File file = new File("employees.csv"); 
             BufferedReader empInfo = new BufferedReader(new FileReader(file));
                     
-            String line; // varible that stores each row of the file
+            String line; // Varible that stores each row of the file
                     
             empInfo.readLine(); // Skip the header row
 
-                    // read every employee in the file
+                    // Read every employee in the file
                     while ((line = empInfo.readLine()) != null) {
 
                         String[] empdata = line.split(","); // Split the row using comma
 
-                        int empNumber = Integer.parseInt(empdata[0]); // convert employee number from text to integer
+                        int empNumber = Integer.parseInt(empdata[0]); // Convert employee number from text to integer
 
-                        // process payroll for each employee
+                        // Process payroll for each employee
                         processEmployee(empNumber);
                     }
 
@@ -165,26 +187,25 @@ public class Main {
     public static void employeeInfo(int empNumber) {
 
         try {
-            // open employees.csv file
+            // Open employees.csv file
             File empDetails = new File("employees.csv"); 
             BufferedReader empInfo = new BufferedReader(new FileReader(empDetails));
             
-            String line; // varible that stores each row of the file
+            String line; // Varible that stores each row of the file
                     
             empInfo.readLine(); // Skip the header row
 
             boolean found = false;
-
+        
+            // Search employee in file 
             while ((line = empInfo.readLine()) != null) {
 
-                String[] empdata = line.split(",");
+                String[] empdata = line.split(","); // Split row
 
                 int num = Integer.parseInt(empdata[0]);
 
-                // if employee number matches
+                // If employee number matches
                 if (num == empNumber) {
-
-                    found = true;
 
                     System.out.println("-----------------------------------------------");
                     System.out.println("               Employee Details                ");
@@ -192,7 +213,7 @@ public class Main {
                     System.out.println("| Emp #  | Name                | Birthday     |");
                     System.out.println("-----------------------------------------------");
 
-                    // display employee details
+                    // Display employee details
                     System.out.println("| " + num
                             + " | " + empdata[2] + " " + empdata[1]
                             + " | " + empdata[3]);
@@ -200,10 +221,9 @@ public class Main {
                     break;
                 }
          }
+            // If employee not found
             if(!found){
                     System.out.println("Employee number does not exist");
-            }   
-
             empInfo.close();
 
         } catch (Exception e) {
@@ -218,23 +238,23 @@ public class Main {
     public static void processEmployee(int empNumber) {
 
         try {
-       // open employees.csv file
+       // Open employees.csv file
        File empDetails = new File("employees.csv"); 
        BufferedReader empInfo = new BufferedReader(new FileReader(empDetails));
             
-       String line; // varible that stores each row of the file
+       String line; // Varible that stores each row of the file
 
-            // employee information variables
+            // Employee information variables
             String firstName = ""; // employee first name
             String lastName = "";  // employee last name
             String birthday = "";  // employee birthday
             double hourlyRate = 0; // employee hourly salary
 
-            empInfo.readLine(); // skip header
+            empInfo.readLine(); // Skip header
 
             boolean found = false;
 
-            // search employee in CSV file
+            // Search employee in CSV file
             while ((line = empInfo.readLine()) != null) {
 
                 String[] empdata = line.split(",");
@@ -254,7 +274,7 @@ public class Main {
                 }
             }
 
-            // if employee does not exist
+            // If employee does not exist
             if (!found) {
                 System.out.println("Employee does not exist.");
                 return;
@@ -262,7 +282,7 @@ public class Main {
 
             empInfo.close();
 
-            // display employee header
+            // Display employee header
             System.out.println("-----------------------------------------------");
             System.out.println("               Employee Details                ");
             System.out.println("===============================================");
@@ -273,7 +293,7 @@ public class Main {
                             + " | " + birthday);
             System.out.println("-----------------------------------------------");
 
-            // loop months from June to December
+            // Loop months from June to December
             for (int month = 6; month <= 12; month++) {
 
                 double firstCutoff = 0;   // June 1-15
@@ -284,9 +304,9 @@ public class Main {
             BufferedReader attendance = new BufferedReader(new FileReader(attRecord));
             attendance.readLine(); // skip header row
 
-                String line2; //
+                String line2; // Varible that stores each row of the file
 
-                // read attendance records
+                // Read attendance records
                 while ((line2 = attendance.readLine()) != null) {
 
                     String[] empAttendance = line2.split(",");
@@ -295,13 +315,13 @@ public class Main {
                     int m = Integer.parseInt(empAttendance[1]);
                     int day = Integer.parseInt(empAttendance[2]);
 
-                    // check employee and month
+                    // Check employee and month
                     if (num == empNumber && m == month) {
                         
                         // Compute total hours worked for the day
                         double hours = computeHours(empAttendance[3], empAttendance[4]);
 
-                        // separate hours by cutoff
+                        // Separate hours by cutoff
                         if (day <= 15) {
                             firstCutoff += hours;
                         } else {
@@ -318,6 +338,7 @@ public class Main {
 
                 if (firstCutoff > 0) {
 
+                    // Compute gross salary
                     double grossSalary = firstCutoff * hourlyRate;
 
                     System.out.println("\nCutoff Date: " + getMonth(month) + " 1 to 15");
@@ -331,7 +352,8 @@ public class Main {
                 // =============================
 
                 if (secondCutoff > 0) {
-
+                    
+                    // Compute gross salary
                     double gross = secondCutoff * hourlyRate;
 
                     //_____________________________
@@ -396,7 +418,7 @@ public class Main {
 
                     //_________________________________
                     // Pagibig Contribution Computation 
-                    double pagibig;
+                    double pagibig; 
 
                     if (gross >= 1000 && gross <= 1500)
                         pagibig = gross * 0.01;
@@ -406,10 +428,12 @@ public class Main {
                     if (pagibig > 100)
                         pagibig = 100;
 
-                    //______________________________________________
+                    
                     // Taxable Income Computation (After Deductions)
-                    double taxableIncome = gross - (sss + phil + pagibig);
+                    double taxableIncome = gross - (sss + phil + pagibig); 
 
+                    //_________________________________
+                    // Tax Contribution Computation 
                     double tax = 0;
 
                     if (taxableIncome <= 20832)
@@ -425,10 +449,10 @@ public class Main {
                     else
                         tax = 200833.33 + (taxableIncome - 666667) * 0.35;
 
-                    double totalDeduction = sss + phil + pagibig + tax;
-                    double net = gross - totalDeduction;
+                    double totalDeduction = sss + phil + pagibig + tax; // Total deductions
+                    double net = gross - totalDeduction;                // Net salary after deductions
 
-                    // display payroll details
+                    // Display payroll details
                     System.out.println("\nCutoff Date: " + getMonth(month) + " 16 to end");
                     System.out.println("Total Hours Worked: " + secondCutoff);
                     System.out.println("Gross Salary: " + gross);
@@ -455,18 +479,20 @@ public class Main {
 
     public static double computeHours(String in, String out) {
 
-                    // Convert time-in to decimal hours
-                    String[] inTime = in.split(":");
+                    // Convert time-in (HH:MM) to decimal hours
+                    String[] inTime = in.split(":"); // Split time-in
                     int inHour = Integer.parseInt(inTime[0]);
                     int inMin = Integer.parseInt(inTime[1]);
- 
+
+                    // Convert time-in into decimal hours
                     double timeIn = inHour + (inMin / 60.0); // 08:30 -> 8.5
 
-                    // Convert time-out to decimal hours
-                    String[] outTime = out.split(":");
+                    // Convert time-out (HH:MM) to decimal hours
+                    String[] outTime = out.split(":"); // Split time-out
                     int outHour = Integer.parseInt(outTime[0]);
                     int outMin = Integer.parseInt(outTime[1]);
 
+                    // Convert time-out into decimal hours
                     double timeOut = outHour + (outMin / 60.0); // 17:00 -> 17.0
 
                     // Compute total hours worked
@@ -481,6 +507,7 @@ public class Main {
 
     public static String getMonth(int m) {
 
+        // Convert month number to month name
         if (m == 6) return "June";
         if (m == 7) return "July";
         if (m == 8) return "August";
