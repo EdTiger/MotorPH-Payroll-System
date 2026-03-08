@@ -1,6 +1,24 @@
 package motorph;
-
-
+/**
+ * MotorPH Payroll System
+ *
+ * This program reads employee and attendance records from CSV files
+ * and computes payroll automatically.
+ *
+ * Features:
+ * - Login system (Employee or Payroll Staff)
+ * - Employee information lookup
+ * - Payroll processing
+ * - Automatic computation of:
+ *      - Gross Salary
+ *      - SSS Contribution
+ *      - PhilHealth Contribution
+ *      - Pag-IBIG Contribution
+ *      - Income Tax
+ * - Payroll summary per cutoff
+ *
+ * Developed for MotorPH Phase 1 Payroll System
+ */
 import java.io.*;      // allows reading files like CSV
 import java.util.*;    // allows using Scanner for input
 
