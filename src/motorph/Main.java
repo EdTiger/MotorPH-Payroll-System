@@ -149,10 +149,10 @@ public class Main {
 
             if (empChoice == 2) {
 
-                try {
+                try 
             // open employees.csv file
-            File file = new File("employees.csv"); 
-            BufferedReader empInfo = new BufferedReader(new FileReader(file));
+            File empDetails = new File("employees.csv"); 
+            BufferedReader empInfo = new BufferedReader(new FileReader(empDetails));
                     
             String line; // Varible that stores each row of the file
                     
@@ -222,12 +222,11 @@ public class Main {
 
                     break;
                 }
-            }
+         }
             // If employee not found
             if(!found){
                     System.out.println("Employee number does not exist");
             }
-
             empInfo.close();
 
         } catch (Exception e) {
