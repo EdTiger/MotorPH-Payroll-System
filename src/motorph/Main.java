@@ -149,7 +149,7 @@ public class Main {
 
             if (empChoice == 2) {
 
-                try 
+            try {
             // open employees.csv file
             File empDetails = new File("employees.csv"); 
             BufferedReader empInfo = new BufferedReader(new FileReader(empDetails));
