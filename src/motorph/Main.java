@@ -151,8 +151,8 @@ public class Main {
 
                 try 
             // open employees.csv file
-            File file = new File("employees.csv"); 
-            BufferedReader empInfo = new BufferedReader(new FileReader(file));
+            File empDetails = new File("employees.csv"); 
+            BufferedReader empInfo = new BufferedReader(new FileReader(empDetails));
                     
             String line; // Varible that stores each row of the file
                     
@@ -207,6 +207,8 @@ public class Main {
                 // If employee number matches
                 if (num == empNumber) {
 
+                    found = true;
+
                     System.out.println("-----------------------------------------------");
                     System.out.println("               Employee Details                ");
                     System.out.println("===============================================");
@@ -224,6 +226,7 @@ public class Main {
             // If employee not found
             if(!found){
                     System.out.println("Employee number does not exist");
+            }
             empInfo.close();
 
         } catch (Exception e) {
