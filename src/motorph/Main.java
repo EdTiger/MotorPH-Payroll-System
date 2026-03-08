@@ -177,8 +177,8 @@ public class Main {
 
         try {
             
-            File file = new File("employees.csv"); // Make sure this is plain text
-            BufferedReader empInfo = new BufferedReader(new FileReader(file));
+            File empDetails = new File("employees.csv"); 
+            BufferedReader empInfo = new BufferedReader(new FileReader(empDetails));
             String line;
                     
 
@@ -223,7 +223,8 @@ public class Main {
 
         try {
 
-            BufferedReader empInfo = new BufferedReader(new FileReader("employees.csv"));
+            File empDetails = new File("employees.csv"); 
+            BufferedReader empInfo = new BufferedReader(new FileReader(empDetails));
             String line;
 
             // employee information variables
@@ -281,8 +282,9 @@ public class Main {
                 double firstCutoff = 0;   // June 1-15
                 double secondCutoff = 0;  // June 16-end
 
-                BufferedReader attendance = new BufferedReader(new FileReader("attendance.csv"));
-                attendance.readLine();
+            File attRecord = new File("attendance.csv"); 
+            BufferedReader attendance = new BufferedReader(new FileReader(attRecord));
+            attendance.readLine();
 
                 String line2;
 
@@ -472,6 +474,7 @@ public class Main {
                     double hoursWorked = timeOut - timeIn; // Work hours = Ending time − Starting time
 
                     return hoursWorked;
+    }
 
     // ============================================
     // GET MONTH NAME
