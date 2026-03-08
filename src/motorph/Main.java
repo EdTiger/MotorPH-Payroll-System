@@ -68,17 +68,7 @@ public class Main {
             System.out.println("\n1 Enter employee number");
             System.out.println("2 Exit");
 
-            int choice = Integer.parseInt(scanner.nextLine()); //scanner.nextLine() reads user input as TEXT (String)
-            
-
-//             but we need a NUMBER for menu selection.
-//
-//             Integer.parseInt() converts the text into an integer.
-//
-//             Example:
-//             user types: "1"
-//             scanner.nextLine() -> "1"
-//             Integer.parseInt("1") -> 1
+            int choice = Integer.parseInt(scanner.nextLine()); // Integer.parseInt() converts the text into an integer
 
             // exit option
             if (choice == 2) {
@@ -138,22 +128,20 @@ public class Main {
             if (empChoice == 2) {
 
                 try {
-
                     // open employees.csv file
+            File file = new File("employees.csv"); 
+            BufferedReader empInfo = new BufferedReader(new FileReader(file));
                     
-                    File file = new File("employees.csv"); // Make sure this is plain text
-                    BufferedReader empInfo = new BufferedReader(new FileReader(file));
+            String line; // varible that stores each row of the file
                     
-                    empInfo.readLine(); // skip header row
-
-                    String line;
+            empInfo.readLine(); // Skip the header row
 
                     // read every employee in the file
                     while ((line = empInfo.readLine()) != null) {
 
-                        String[] empdata = line.split(",");
+                        String[] empdata = line.split(","); // Split the row using comma
 
-                        int empNumber = Integer.parseInt(empdata[0]);
+                        int empNumber = Integer.parseInt(empdata[0]); // convert employee number from text to integer
 
                         // process payroll for each employee
                         processEmployee(empNumber);
@@ -177,13 +165,13 @@ public class Main {
     public static void employeeInfo(int empNumber) {
 
         try {
-            
+            // open employees.csv file
             File empDetails = new File("employees.csv"); 
             BufferedReader empInfo = new BufferedReader(new FileReader(empDetails));
-            String line;
+            
+            String line; // varible that stores each row of the file
                     
-
-            empInfo.readLine(); // skip header
+            empInfo.readLine(); // Skip the header row
 
             boolean found = false;
 
