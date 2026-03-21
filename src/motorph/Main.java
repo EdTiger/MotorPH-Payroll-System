@@ -149,7 +149,7 @@ public class Main {
             try {
             BufferedReader empInfo = new BufferedReader(new FileReader("employees.csv")); // open employees.csv file
             empInfo.readLine(); // skip header   
-            String line; // Variable that stores each row of the file
+            String recordLine; // Variable that stores each row of the file
                     
                     // Read every employee in the file
                     while ((line = empInfo.readLine()) != null) {
@@ -180,17 +180,17 @@ public class Main {
         try {
             BufferedReader empInfo = new BufferedReader(new FileReader("employees.csv")); 
             empInfo.readLine();
-            String line; 
+            String recordLine; 
 
             boolean found = false;      
             
             while ((line = empInfo.readLine()) != null) {
 
                 String[] empData = line.split(","); 
-                int num = Integer.parseInt(empData[0]);
+                int number = Integer.parseInt(empData[0]);
 
                 // If employee number matches
-                if (num == empNumber) {
+                if (number == empNumber) {
 
                     found = true;
 
@@ -226,7 +226,7 @@ public class Main {
        try {
         BufferedReader empInfo = new BufferedReader(new FileReader("employees.csv"));
         empInfo.readLine();    
-        String line; 
+        String recordLine; 
 
             // Employee information variables
             String firstName = ""; // employee first name
@@ -278,7 +278,7 @@ public class Main {
             BufferedReader attendance = new BufferedReader(new FileReader("attendance.csv"));
             attendance.readLine(); // skip header row
 
-                String line2; // Variable that stores each row of the file
+                String recordLine2; // Variable that stores each row of the file
 
                 while ((line2 = attendance.readLine()) != null) { // Loop through the file until there are no more lines (null means end of file)
                     records.add(line2.split(","));
@@ -296,12 +296,12 @@ public class Main {
                 for (String[] empAttendance : records) { // record inside the list one by one
                     
                    
-                    int num = Integer.parseInt(empAttendance[0]);
+                    int number = Integer.parseInt(empAttendance[0]);
                     int m = Integer.parseInt(empAttendance[1]);
                     int day = Integer.parseInt(empAttendance[2]);
 
                     // Check employee and month
-                    if (num == empNumber && m == month) {
+                    if (number == empNumber && m == month) {
                         
                         // Compute total hours worked for the day
                         double hours = computeHours(empAttendance[3], empAttendance[4]);
