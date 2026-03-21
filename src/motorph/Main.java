@@ -278,7 +278,7 @@ public class Main {
             BufferedReader attendance = new BufferedReader(new FileReader("attendance.csv"));
             attendance.readLine(); // skip header row
 
-                String line2; // Varible that stores each row of the file
+                String line2; // Variable that stores each row of the file
 
                 while ((line2 = attendance.readLine()) != null) { // Loop through the file until there are no more lines (null means end of file)
                     records.add(line2.split(","));
