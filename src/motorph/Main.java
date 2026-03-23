@@ -552,7 +552,7 @@ public class Main {
 
     /**
      * Prompts the user for an integer input and re-prompts if the input is not a valid number.
-     * This prevents NumberFormatException crashes from non-numeric input.
+     * This method will keep asking until the user provides a valid whole number.
      */
     public static int getValidInt(Scanner scanner, String prompt) {
         while (true) {
