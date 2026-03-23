@@ -237,9 +237,9 @@ public class Main {
             double hourlyRate = 0; // employee hourly salary
             boolean found = false;
 
-            while ((line = employeeInfo.readLine()) != null) {
+            while ((recordLine = employeeInfo.readLine()) != null) {
 
-                String[] employeeData = line.split(",");
+                String[] employeeData = recordLine.split(",");
 
                 if (Integer.parseInt(employeeData[0]) == empNumber){
 
@@ -280,10 +280,10 @@ public class Main {
             BufferedReader attendance = new BufferedReader(new FileReader("attendance.csv"));
             attendance.readLine(); // skip header row
 
-            String line2; // Variable that stores each row of the file
+            String recordLine2; // Variable that stores each row of the file
 
-            while ((line2 = attendance.readLine()) != null) { // Loop through the file until there are no more lines (null means end of file)
-                records.add(line2.split(","));
+            while ((recordLine2 = attendance.readLine()) != null) { // Loop through the file until there are no more lines (null means end of file)
+                records.add(recordLine2.split(","));
 
             }
             attendance.close();
